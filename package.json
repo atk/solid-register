@@ -1,0 +1,35 @@
+{
+  "name": "solid-require",
+  "version": "0.0.0",
+  "description": "integrated package to run solid browser code in node",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "solid.js",
+    "testing",
+    "node"
+  ],
+  "author": "Alex Lohr",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jsdom": "^16.2.13",
+    "@types/node": "^16.11.1",
+    "babel-preset-solid": "^1.1.5",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "@babel/register": "^7.15.3",
+    "happy-dom": "^2.24.1",
+    "jsdom": "^18.0.0",
+    "linkedom": "^0.12.1",
+    "ts-node": "^10.3.0"
+  },
+  "solid-register": {
+    "dom": "jsdom"
+  }
+}
