@@ -54,7 +54,7 @@ if (config.compile?.css !== false) {
   require('./compile-css');
 }
 
-if (config.aliases?.filenames) {
+if (config.aliases?.filenames || config.aliases?.solid) {
   require('./compile-aliases');
 }
 

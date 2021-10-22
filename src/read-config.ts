@@ -1,9 +1,4 @@
 export type SolidRegisterConfiguration = {
-  /** which DOM implementation should be registered and what URL should be used */
-  dom?: 
-    | 'jsdom' | 'happy-dom' | 'linkedom'
-    | { engine: 'jsdom' | 'happy-dom' | 'linkedom', url?: string }
-    | false,
   compile?: {
     /** configure solid configuration */
     solid?: boolean | { engine: 'solid' | 'ts-node' } | { engine: 'babel', extensions: string[] },
@@ -14,24 +9,40 @@ export type SolidRegisterConfiguration = {
       extensions: string[]
     } | boolean
   },
-  /**
-   * an object containing find-Expressions that will be used as `RegExp` and the value as a replace string,
-   * @example ```ts
-   * "aliases": {
-   *   "my-dependency": "my-dependency/mock"
-   * }
-   * ```
-   * You can also use replace groups and other `RegExp` features
-   */
+  /** which DOM implementation should be registered and what URL should be used (default: jsdom and https://localhost:3000) */
+  dom?: 
+    | 'jsdom' | 'happy-dom' | 'linkedom'
+    | { engine: 'jsdom' | 'happy-dom' | 'linkedom', url?: string }
+    | false,
+  /** setup filename aliasing for running browser/dev/server versions of solid or mocks */
   aliases?: {
-    filenames: { [find: string]: string },
+    /**
+     * an object containing find-Expressions that will be used as `RegExp` and the value as a replace string,
+     * @example ```ts
+     * "filenames": { "my-dependency": "my-dependency/mock" }
+     * ```
+     * You can also use replace groups and other `RegExp` features
+     */
+    filenames?: { [find: string]: string },
+    /**
+     * The extensions for which the aliases should be applied, including the dot; default is `['.js', '.jsx', '.ts', '.tsx']`
+     */
     extensions?: string[]
+    /**
+     * A shorthand to mock the resolution of solid environments, default is `'dev'`
+     * 
+     * You can alternatively run your testing with `node --conditions browser [testing script]`; in this case, the solid aliases will not be applied
+     */
+    solid?: 'server' | 'dev' | 'browser'
   },
   /** files you want to run to setup your environment */
   setupFiles?: string[]
 };
 
-const config: SolidRegisterConfiguration = {};
+const config: SolidRegisterConfiguration = {
+  dom: 'jsdom',
+  aliases: { solid: 'dev' }
+};
 
 const getPackageJson = () => {
   let path = process.cwd();
@@ -42,7 +53,7 @@ const getPackageJson = () => {
     } catch(e) { /* package.json not loaded */ }
     path = path.replace(/\/[^/]+$/, '');
   }
-  console.warn('\x1b[33m⚠️ package.json could not be found\x1b[0m');
+  console.warn('\x1b[33m⚠️ package.json could not be found; maybe you\'re not in a project?\x1b[0m');
   return [{}, './'];
 }
 
