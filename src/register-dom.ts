@@ -15,6 +15,7 @@ export const registerDom = (dom: any) => {
     HTMLElement,
     requestAnimationFrame,
     cancelAnimationFrame,
-    navigator
+    navigator,
+    Event: window.Event
   });
 }

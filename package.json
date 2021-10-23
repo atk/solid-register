@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -14,12 +14,14 @@
   ],
   "author": "Alex Lohr",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
+    "babel-preset-solid": "^1.1.5"
+  },
+  "devDependencies": {
     "@types/node": "^16.11.1",
-    "babel-preset-solid": "^1.1.5",
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
