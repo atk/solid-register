@@ -4,10 +4,11 @@
     "module": "commonjs",
     "target": "es2021",
     "strict": true,
+    "declaration": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
   "include": ["src"]
 }
