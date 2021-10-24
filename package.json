@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -31,6 +31,14 @@
     "@types/jsdom": "^16.2.13",
     "jsdom": "^18.0.0",
     "linkedom": "^0.12.1"
+  },
+  "peerDependenciesMeta": {
+    "@babel/register": { "optional": true },
+    "ts-node": { "optional": true },
+    "happy-dom": { "optional": true },
+    "@types/jsdom": { "optional": true },
+    "jsdom": { "optional": true },
+    "linkedom": { "optional": true }
   },
   "solid-register": {
     "dom": "jsdom"
