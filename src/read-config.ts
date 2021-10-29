@@ -51,7 +51,7 @@ const getPackageJson = () => {
       const packageJson = require(`${path}/package.json`);
       return [packageJson, path];
     } catch(e) { /* package.json not loaded */ }
-    path = path.replace(/\/[^/]+$/, '');
+    path = path.replace(/[\/\\][^/\\]+$/, '');
   }
   console.warn('\x1b[33m⚠️ package.json could not be found; maybe you\'re not in a project?\x1b[0m');
   return [{}, './'];

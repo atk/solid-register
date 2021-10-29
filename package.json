@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": ["dist"],
@@ -18,19 +18,19 @@
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
-    "babel-preset-solid": "^1.1.5"
+    "babel-preset-solid": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.1",
+    "@types/node": "^16.11.6",
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
     "@babel/register": "^7.15.3",
-    "ts-node": "^10.3.0",
+    "ts-node": "^10.4.0",
     "happy-dom": "^2.24.1",
     "@types/jsdom": "^16.2.13",
     "jsdom": "^18.0.0",
-    "linkedom": "^0.12.1"
+    "linkedom": "^0.13.0"
   },
   "peerDependenciesMeta": {
     "@babel/register": { "optional": true },
@@ -39,8 +39,5 @@
     "@types/jsdom": { "optional": true },
     "jsdom": { "optional": true },
     "linkedom": { "optional": true }
-  },
-  "solid-register": {
-    "dom": "jsdom"
   }
 }

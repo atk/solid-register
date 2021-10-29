@@ -1,17 +1,18 @@
 import { config } from './read-config';
+import { sep } from 'path';
 
 const solidAliases = {
   server: {
-    "solid-js\/dist\/(solid|dev)": "solid-js/dist/solid",
-    "solid-js\/web\/dist\/(web|dev)": "solid-js/web/dist/web"
+    [`solid-js${sep}dist${sep}(solid|dev)`]: `solid-js${sep}dist${sep}solid`,
+    [`solid-js${sep}web${sep}dist${sep}(web|dev)`]: `solid-js${sep}web${sep}dist${sep}web`
   },
   dev: {
-    "solid-js\/dist\/(server|solid)": "solid-js/dist/dev",
-    "solid-js\/web\/dist\/(server|web)": "solid-js/web/dist/dev"
+    [`solid-js${sep}dist${sep}(server|solid)`]: `solid-js${sep}dist${sep}dev`,
+    [`solid-js${sep}web${sep}dist${sep}(server|web)`]: `solid-js${sep}web${sep}dist${sep}dev`
   },
   browser: {
-    "solid-js\/dist\/(server|dev)": "solid-js/dist/solid",
-    "solid-js\/web\/dist\/(server|dev)": "solid-js/web/dist/web"
+    [`solid-js${sep}dist${sep}(server|dev)`]: `solid-js${sep}dist${sep}solid`,
+    [`solid-js${sep}web${sep}dist${sep}(server|dev)`]: `solid-js${sep}web${sep}dist${sep}web`
   }
 };
 
