@@ -3,16 +3,16 @@ import { sep } from 'path';
 
 const solidAliases = {
   server: {
-    [`solid-js${sep}dist${sep}(solid|dev)`]: `solid-js${sep}dist${sep}solid`,
-    [`solid-js${sep}web${sep}dist${sep}(web|dev)`]: `solid-js${sep}web${sep}dist${sep}web`
+    [`solid-js\\${sep}dist\\${sep}(solid|dev)`]: `solid-js\\${sep}dist\\${sep}solid`,
+    [`solid-js\\${sep}web\\${sep}dist\\${sep}(web|dev)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}web`
   },
   dev: {
-    [`solid-js${sep}dist${sep}(server|solid)`]: `solid-js${sep}dist${sep}dev`,
-    [`solid-js${sep}web${sep}dist${sep}(server|web)`]: `solid-js${sep}web${sep}dist${sep}dev`
+    [`solid-js\\${sep}dist\\${sep}(server|solid)`]: `solid-js\\${sep}dist\\${sep}dev`,
+    [`solid-js\\${sep}web\\${sep}dist\\${sep}(server|web)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}dev`
   },
   browser: {
-    [`solid-js${sep}dist${sep}(server|dev)`]: `solid-js${sep}dist${sep}solid`,
-    [`solid-js${sep}web${sep}dist${sep}(server|dev)`]: `solid-js${sep}web${sep}dist${sep}web`
+    [`solid-js\\${sep}dist\\${sep}(server|dev)`]: `solid-js\\${sep}dist\\${sep}solid`,
+    [`solid-js\\${sep}web\\${sep}dist\\${sep}(server|dev)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}web`
   }
 };
 
