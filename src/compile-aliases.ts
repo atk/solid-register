@@ -1,18 +1,20 @@
 import { config } from './read-config';
 import { sep } from 'path';
 
+const s = sep === '/' ? sep : `${sep}${sep}`;
+
 const solidAliases = {
   server: {
-    [`solid-js\\${sep}dist\\${sep}(solid|dev)`]: `solid-js\\${sep}dist\\${sep}solid`,
-    [`solid-js\\${sep}web\\${sep}dist\\${sep}(web|dev)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}web`
+    [`solid-js${s}dist${s}(solid|dev)`]: `solid-js${s}dist${s}solid`,
+    [`solid-js${s}web${s}dist${s}(web|dev)`]: `solid-js${s}web${s}dist${s}web`
   },
   dev: {
-    [`solid-js\\${sep}dist\\${sep}(server|solid)`]: `solid-js\\${sep}dist\\${sep}dev`,
-    [`solid-js\\${sep}web\\${sep}dist\\${sep}(server|web)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}dev`
+    [`solid-js${s}dist${s}(server|solid)`]: `solid-js${s}dist${s}dev`,
+    [`solid-js${s}web${s}dist${s}(server|web)`]: `solid-js${s}web${s}dist${s}dev`
   },
   browser: {
-    [`solid-js\\${sep}dist\\${sep}(server|dev)`]: `solid-js\\${sep}dist\\${sep}solid`,
-    [`solid-js\\${sep}web\\${sep}dist\\${sep}(server|dev)`]: `solid-js\\${sep}web\\${sep}dist\\${sep}web`
+    [`solid-js${s}dist${s}(server|dev)`]: `solid-js${s}dist${s}solid`,
+    [`solid-js${s}web${s}dist${s}(server|dev)`]: `solid-js${s}web${s}dist${s}web`
   }
 };
 
