@@ -18,4 +18,9 @@ export const registerDom = (dom: any) => {
     navigator,
     Event: window.Event
   });
+  Object.getOwnPropertyNames(dom).forEach((name) => {
+    if (/^HTML\w+Element$/.test(name)) {
+      Object.assign(globalThis, { [name]: dom[name] });
+    }
+  });
 }
