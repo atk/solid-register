@@ -5,6 +5,7 @@ export const registerDom = (dom: any) => {
     Node,
     HTMLElement,
     SVGElement,
+    DOMParser,
     requestAnimationFrame,
     cancelAnimationFrame,
     navigator
@@ -15,6 +16,7 @@ export const registerDom = (dom: any) => {
     Node,
     HTMLElement,
     SVGElement,
+    DOMParser,
     requestAnimationFrame,
     cancelAnimationFrame,
     navigator,
