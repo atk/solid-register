@@ -8,7 +8,7 @@ import "regenerator-runtime/runtime";
 import { registerExtension } from "./register-extension";
 
 const createTransformer = (presets: any[]) => (code: string, filename: string) => {
-  const transformed = transformSync(code, { filename, presets });
+  const transformed = transformSync(code, { filename, presets, sourceMaps: 'inline' });
   if (!transformed.code) {
     console.warn('\x1b[33m⚠️ could not transform file', filename);
   }

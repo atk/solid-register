@@ -4,6 +4,7 @@ export const registerDom = (dom: any) => {
     document,
     Node,
     HTMLElement,
+    SVGElement,
     requestAnimationFrame,
     cancelAnimationFrame,
     navigator
@@ -13,6 +14,7 @@ export const registerDom = (dom: any) => {
     document,
     Node,
     HTMLElement,
+    SVGElement,
     requestAnimationFrame,
     cancelAnimationFrame,
     navigator,
