@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": ["dist"],

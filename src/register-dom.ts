@@ -8,7 +8,9 @@ export const registerDom = (dom: any) => {
     DOMParser,
     requestAnimationFrame,
     cancelAnimationFrame,
-    navigator
+    navigator,
+    localStorage,
+    sessionStorage
   } = dom;
   Object.assign(globalThis, {
     window,
@@ -20,6 +22,8 @@ export const registerDom = (dom: any) => {
     requestAnimationFrame,
     cancelAnimationFrame,
     navigator,
+    localStorage,
+    sessionStorage,
     Event: window.Event
   });
   Object.getOwnPropertyNames(dom).forEach((name) => {
