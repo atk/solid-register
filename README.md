@@ -138,6 +138,22 @@ Don't forget to add the command to your `package.json` scripts.
 
 solid-register will automatically default to browser testing using the development environment; if you provide the `--conditions` flag yourself, it will detect it and not alias the solid import file names. The aliasing will only very slightly slow down, so both ways are valid. However, the aliasing will only affect the `solid-js` imports, other libraries with conditional exports will then get the node version by default. Also, if you need to test in different conditions, using the node argument may be the better choice.
 
+## FAQ
+
+### I get an error that `regenerator-runtime` is missing
+
+If you are not using the solid-transform, you may need to add this manually.
+
+### I get `TypeError: _$template is not a function`
+
+This happens if you attempt to run solid code meant for the browser loaded with the solid version meant for the server. Either the file aliasing mechanism did not work (e.g. because you are also using [`module-alias`](https://github.com/ilearnio/module-alias)) or you misconfigured the aliases.
+
+What you can do is add `node --conditions browser node_modules/.bin/` before your command starting the test runner (replace `/` with `\\` if you are running windows).
+
+### I get errors that babel cannot find its polyfills
+
+Again maybe your aliases are to broad; narrow them down. Installing `@babel/plugin-transform-runtime` might be another viable option.
+
 ## Building solid-register
 
 You need to install the dependencies and run the `build` script
