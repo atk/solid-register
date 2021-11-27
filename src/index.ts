@@ -58,4 +58,6 @@ if (config.aliases?.filenames || config.aliases?.solid) {
   require('./compile-aliases');
 }
 
+require('./register-extension').init();
+
 config.setupFiles?.forEach(require);

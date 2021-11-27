@@ -1,5 +1,10 @@
 import { config } from './read-config';
 
+let pluginTransformRuntime: any;
+try {
+  pluginTransformRuntime = require('@babel/plugin-transform-runtime');
+} catch(e) {}
+
 const extensions = typeof config.compile?.solid === 'object' &&
   config.compile.solid.engine === 'babel' &&
   config.compile.solid.extensions ||
@@ -12,6 +17,7 @@ try {
       "babel-preset-solid",
       "@babel/preset-typescript"
     ],
+    ...(pluginTransformRuntime ? { plugins: [pluginTransformRuntime] } : {}),
     extensions
   });
 } catch(e) {

@@ -1,4 +1,4 @@
-import { registerExtension } from "./register-extension";
+import { registerCompiler } from "./register-extension";
 
 const loadStyles = (filename: string, styles: string) =>
   `if (!document.querySelector(\`[data-filename="${filename}"]\`)) {
@@ -40,7 +40,7 @@ const getModuleClasses = (styles: string): Record<string, string> => {
   return identifiers;
 };
 
-registerExtension('.css', (styles, filename) => loadStyles(filename, styles));
-registerExtension('.module.css', (styles, filename) =>
+registerCompiler('.css', (styles, filename) => loadStyles(filename, styles));
+registerCompiler('.module.css', (styles, filename) =>
   `${loadStyles(filename, styles)}
 module.exports = ${JSON.stringify(getModuleClasses(styles))};`);

@@ -63,6 +63,12 @@ Object.assign(config, packageJson?.['solid-register']);
 
 try {
   Object.assign(config, require(`${projectPath}solid-register-config`));
-} catch(e) {}
+} catch(e: any) {
+  if ('code' in e && e.code !== 'MODULE_NOT_FOUND') {
+    if (e instanceof Error) {
+      throw e;
+    }
+  }
+}
 
 export { config };

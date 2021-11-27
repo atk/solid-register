@@ -152,7 +152,7 @@ What you can do is add `node --conditions browser node_modules/.bin/` before you
 
 ### I get errors that babel cannot find its polyfills
 
-Again maybe your aliases are to broad; narrow them down. Installing `@babel/plugin-transform-runtime` might be another viable option.
+Again maybe your aliases are to broad; narrow them down. Installing `@babel/plugin-transform-runtime` might be another viable option. It is now an optional peer dependency that will be used if installed.
 
 ## Building solid-register
 

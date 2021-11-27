@@ -1,9 +1,11 @@
 {
   "name": "solid-register",
-  "version": "0.0.18",
+  "version": "0.1.0",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc"
   },
@@ -16,28 +18,43 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-typescript": "^7.16.0",
-    "babel-preset-solid": "^1.2.5"
+    "babel-preset-solid": "^1.2.5",
+    "esbuild": "^0.14.0",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
+    "@types/babel__core": "^7.1.16",
+    "@types/babel__plugin-transform-runtime": "^7.9.2",
+    "@types/jsdom": "^16.2.13",
     "typescript": "^4.5.2"
   },
   "peerDependencies": {
     "@babel/register": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
     "ts-node": "^10.4.0",
     "happy-dom": "^2.24.4",
-    "@types/jsdom": "^16.2.13",
     "jsdom": "^18.1.1",
     "linkedom": "^0.13.0"
   },
   "peerDependenciesMeta": {
-    "@babel/register": { "optional": true },
-    "ts-node": { "optional": true },
-    "happy-dom": { "optional": true },
-    "@types/jsdom": { "optional": true },
-    "jsdom": { "optional": true },
-    "linkedom": { "optional": true }
+    "@babel/plugin-transform-runtime": {
+      "optional": true
+    },
+    "@babel/register": {
+      "optional": true
+    },
+    "ts-node": {
+      "optional": true
+    },
+    "happy-dom": {
+      "optional": true
+    },
+    "jsdom": {
+      "optional": true
+    },
+    "linkedom": {
+      "optional": true
+    }
   }
 }
