@@ -29,18 +29,23 @@ const getModuleClasses = (styles: string): Record<string, string> => {
     /(?:^|}[\r\n\s]*)(\.\w[\w-_]*)|@keyframes\s+([\{\s\r\n]+?)[\r\n\s]*\{/g,
     (_, classname, animation) => {
       if (classname) {
-        identifiers[classname] = identifiers[toCamelCase(classname)] = classname;
+        identifiers[classname] = identifiers[toCamelCase(classname)] =
+          classname;
       }
       if (animation) {
-        identifiers[animation] = identifiers[toCamelCase(animation)] = animation;
+        identifiers[animation] = identifiers[toCamelCase(animation)] =
+          animation;
       }
-      return '';
+      return "";
     }
   );
   return identifiers;
 };
 
-registerCompiler('.css', (styles, filename) => loadStyles(filename, styles));
-registerCompiler('.module.css', (styles, filename) =>
-  `${loadStyles(filename, styles)}
-module.exports = ${JSON.stringify(getModuleClasses(styles))};`);
+registerCompiler(".css", (styles, filename) => loadStyles(filename, styles));
+registerCompiler(
+  ".module.css",
+  (styles, filename) =>
+    `${loadStyles(filename, styles)}
+module.exports = ${JSON.stringify(getModuleClasses(styles))};`
+);
