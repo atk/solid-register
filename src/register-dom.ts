@@ -5,7 +5,7 @@ export const registerDom = (dom: any) => {
     dom.cancelAnimationFrame = (id: any) => window.clearTimeout(id);
   }
   Object.getOwnPropertyNames(dom).forEach((name) => {
-    if (name === "Event" || !globalThis.hasOwnProperty(name)) {
+    if (name.startsWith("Event") || !globalThis.hasOwnProperty(name)) {
       Object.assign(globalThis, { [name]: dom[name] });
     }
   });
