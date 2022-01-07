@@ -19,13 +19,14 @@ const loadModule = (module: LoaderModule, filename: string) => {
   try {
     originalLoader(module, filename);
   } catch (error: any) {
-    if (error && error.code === "ERR_REQUIRE_ESM") {
-      const code = readFileSync(filename, "utf-8");
-      module._compile(code, filename);
-    } else {
-      console.error("error when compiling", filename);
-      throw error;
+    if (error) {
+      if (error.code === "ERR_REQUIRE_ESM") {
+        const code = readFileSync(filename, "utf-8");
+        module._compile(code, filename);
+        return;
+      }
     }
+    throw error ?? new Error(`error when compiling ${filename}`);
   }
 };
 

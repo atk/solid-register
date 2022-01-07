@@ -20,7 +20,7 @@ const esbuildTransform = (
   const esbuilt = transformSync(code, {
     format: "esm",
     loader,
-    sourcemap: true,
+    sourcemap: "inline",
     target: "node10",
     ...options,
   });
