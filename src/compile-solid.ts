@@ -1,5 +1,15 @@
-const babelTransformSync = require("@babel/core").transformSync;
-const presetSolid = require("babel-preset-solid");
+import { BabelFileResult, PluginItem } from "@babel/core";
+
+let babelTransformSync = (
+  code: string,
+  _options?: TransformOptions & Record<string, any>
+) => ({ code } as unknown) as BabelFileResult;
+let presetSolid: PluginItem = (_context, _option = {}) => {};
+
+try {
+  babelTransformSync = require("@babel/core").transformSync;
+  presetSolid = require("babel-preset-solid");
+} catch(e) {}
 
 import { Loader, TransformOptions, transformSync } from "esbuild";
 
