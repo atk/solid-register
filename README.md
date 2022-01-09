@@ -32,6 +32,12 @@ Your configuration can either be exported by `solid-register-config.js` or be a 
 ```json
 {
   "solid-register": {
+    "compile": {
+      "solid": {
+        "engine": "solid",
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]  
+      }
+    },
     "dom": "happy-dom",
     "aliases": {
       "filenames": {
@@ -48,22 +54,30 @@ If you leave the configuration blank, normal browser tests should run. The confi
 ### Properties
 
 ```ts
-type SolidRegisterConfiguration = {  
+type SolidRegisterConfiguration = {
   compile?: {
     /** configure solid configuration */
-    solid?: boolean | { engine: 'solid' | 'ts-node' } | { engine: 'babel', extensions: string[] },
+    solid?:
+      | boolean
+      | { engine: "solid"; extensions?: string[] }
+      | { engine: "ts-node" }
+      | { engine: "babel"; extensions: string[] };
     /** switch off css (modules) compilation */
-    css?: boolean,
-    assets?: {
-      /** an array with the extensions string of the files that should return an asset path, i.e. `['.svg', '.csv']` */
-      extensions: string[]
-    } | boolean
-  },
+    css?: boolean;
+    assets?:
+      | {
+          /** an array with the extensions string of the files that should return an asset path, i.e. `['.svg', '.csv']` */
+          extensions: string[];
+        }
+      | boolean;
+  };
   /** which DOM implementation should be registered and what URL should be used (default: jsdom and https://localhost:3000) */
-  dom?: 
-    | 'jsdom' | 'happy-dom' | 'linkedom'
-    | { engine: 'jsdom' | 'happy-dom' | 'linkedom', url?: string }
-    | false,
+  dom?:
+    | "jsdom"
+    | "happy-dom"
+    | "linkedom"
+    | { engine: "jsdom" | "happy-dom" | "linkedom"; url?: string }
+    | false;
   /** setup filename aliasing for running browser/dev/server versions of solid or mocks */
   aliases?: {
     /**
@@ -73,20 +87,20 @@ type SolidRegisterConfiguration = {
      * ```
      * You can also use replace groups and other `RegExp` features
      */
-    filenames?: { [find: string]: string },
+    filenames?: { [find: string]: string };
     /**
      * The extensions for which the aliases should be applied, including the dot; default is `['.js', '.jsx', '.ts', '.tsx']`
      */
-    extensions?: string[]
+    extensions?: string[];
     /**
      * A shorthand to mock the resolution of solid environments, default is `'dev'`
-     * 
-     * Can be left `undefined` if you run your testing with `node --conditions browser [testing script]`
+     *
+     * You can alternatively run your testing with `node --conditions browser [testing script]`; in this case, the solid aliases will not be applied
      */
-    solid?: 'server' | 'dev' | 'browser'
-  },
+    solid?: "server" | "dev" | "browser";
+  };
   /** files you want to run to setup your environment */
-  setupFiles?: string[]
+  setupFiles?: string[];
 };
 ```
 
@@ -153,6 +167,10 @@ What you can do is add `node --conditions browser node_modules/.bin/` before you
 ### I get errors that babel cannot find its polyfills
 
 Again maybe your aliases are to broad; narrow them down. Installing `@babel/plugin-transform-runtime` might be another viable option. It is now an optional peer dependency that will be used if installed.
+
+### I get an error that you cannot use `import` in a js file
+
+Add extensions to the compile.solid part of the solid-register configuration, as shown in the example above.
 
 ## Building solid-register
 

@@ -3,7 +3,8 @@ export type SolidRegisterConfiguration = {
     /** configure solid configuration */
     solid?:
       | boolean
-      | { engine: "solid" | "ts-node" }
+      | { engine: "solid"; extensions?: string[] }
+      | { engine: "ts-node" }
       | { engine: "babel"; extensions: string[] };
     /** switch off css (modules) compilation */
     css?: boolean;

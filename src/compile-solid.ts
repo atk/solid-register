@@ -3,17 +3,18 @@ import { BabelFileResult, PluginItem } from "@babel/core";
 let babelTransformSync = (
   code: string,
   _options?: TransformOptions & Record<string, any>
-) => ({ code } as unknown) as BabelFileResult;
+) => ({ code } as unknown as BabelFileResult);
 let presetSolid: PluginItem = (_context, _option = {}) => {};
 
 try {
   babelTransformSync = require("@babel/core").transformSync;
   presetSolid = require("babel-preset-solid");
-} catch(e) {}
+} catch (e) {}
 
 import { Loader, TransformOptions, transformSync } from "esbuild";
 
 import "regenerator-runtime/runtime";
+import { config } from "./read-config";
 
 import { registerCompiler } from "./register-extension";
 
@@ -71,7 +72,9 @@ const transformer = (code: string, filename: string) =>
       )
     : esbuildTransform(code, filename, { format: "cjs" }, true);
 
-registerCompiler(".js", transformer);
-registerCompiler(".jsx", transformer);
-registerCompiler(".ts", transformer);
-registerCompiler(".tsx", transformer);
+const extensions = (config.compile?.solid &&
+  typeof config.compile?.solid === "object" &&
+  config.compile.solid.engine === "solid" &&
+  config.compile.solid.extensions) || [".jsx", ".ts", ".tsx"];
+
+extensions.forEach((extension) => registerCompiler(extension, transformer));
