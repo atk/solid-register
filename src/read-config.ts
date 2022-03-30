@@ -1,3 +1,5 @@
+import { join } from "path";
+
 export type SolidRegisterConfiguration = {
   compile?: {
     /** configure solid configuration */
@@ -56,7 +58,7 @@ const getPackageJson = () => {
   let path = process.cwd();
   while (path) {
     try {
-      const packageJson = require(`${path}/package.json`);
+      const packageJson = require(join(path, "package.json"));
       return [packageJson, path];
     } catch (e) {
       /* package.json not loaded */
@@ -74,7 +76,7 @@ const [packageJson, projectPath] = getPackageJson();
 Object.assign(config, packageJson?.["solid-register"]);
 
 try {
-  Object.assign(config, require(`${projectPath}solid-register-config`));
+  Object.assign(config, require(join(projectPath, "solid-register-config")));
 } catch (e: any) {
   if ("code" in e && e.code !== "MODULE_NOT_FOUND") {
     if (e instanceof Error) {
