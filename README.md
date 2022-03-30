@@ -180,6 +180,10 @@ You need to install the dependencies and run the `build` script
 npm i && npm run build
 ```
 
+## Contributions
+
+Thanks to [SanichKotikov](https://github.com/SanichKotikov)!
+
 ---
 
 © 2021 Alex Lohr
