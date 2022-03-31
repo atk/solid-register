@@ -1,7 +1,10 @@
+import { config } from "./read-config";
 import { registerCompiler } from "./register-extension";
 
-const loadStyles = (filename: string, styles: string) =>
-  `if (!document.querySelector(\`[data-filename="${filename}"]\`)) {
+const loadStyles = (filename: string, styles: string) => {
+  if (config.compile?.css === "skip") return "";
+
+  return `if (!document.querySelector(\`[data-filename="${filename}"]\`)) {
   const div = document.createElement('div');
   div.innerHTML = \`<style data-filename="${filename}">${styles}</style>\`;
   document.head.appendChild(div.firstChild);
@@ -19,6 +22,7 @@ const loadStyles = (filename: string, styles: string) =>
     }
   });
 }`;
+};
 
 const toCamelCase = (name: string): string =>
   name.replace(/[-_]+(\w)/g, (_, char) => char.toUpperCase());

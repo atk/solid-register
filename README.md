@@ -63,7 +63,7 @@ type SolidRegisterConfiguration = {
       | { engine: "ts-node" }
       | { engine: "babel"; extensions: string[] };
     /** switch off css (modules) compilation */
-    css?: boolean;
+    css?: boolean | "skip";
     assets?:
       | {
           /** an array with the extensions string of the files that should return an asset path, i.e. `['.svg', '.csv']` */
