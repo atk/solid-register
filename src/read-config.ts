@@ -35,7 +35,7 @@ export type SolidRegisterConfiguration = {
      */
     filenames?: { [find: string]: string };
     /**
-     * The extensions for which the aliases should be applied, including the dot; default is `['.js', '.jsx', '.ts', '.tsx']`
+     * The extensions for which files the aliases for import/require statements should be applied, including the dot; default is `['.js', '.jsx', '.ts', '.tsx']`
      */
     extensions?: string[];
     /**
@@ -72,6 +72,8 @@ const getPackageJson = () => {
 };
 
 const [packageJson, projectPath] = getPackageJson();
+
+export { projectPath };
 
 Object.assign(config, packageJson?.["solid-register"]);
 

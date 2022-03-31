@@ -26,10 +26,7 @@ const usesConditions = process.execArgv.some(
 
 const aliases: Record<string, string> = Object.assign(
   config.aliases?.filenames || {},
-  (!usesConditions &&
-    config.aliases?.solid &&
-    solidAliases[config.aliases?.solid]) ||
-    {}
+  (!usesConditions && solidAliases[config.aliases?.solid ?? "dev"]) || {}
 );
 const aliasRegexes = Object.keys(aliases).reduce<Record<string, RegExp>>(
   (regexes, match) => {

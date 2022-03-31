@@ -89,10 +89,6 @@ type SolidRegisterConfiguration = {
      */
     filenames?: { [find: string]: string };
     /**
-     * The extensions for which the aliases should be applied, including the dot; default is `['.js', '.jsx', '.ts', '.tsx']`
-     */
-    extensions?: string[];
-    /**
      * A shorthand to mock the resolution of solid environments, default is `'dev'`
      *
      * You can alternatively run your testing with `node --conditions browser [testing script]`; in this case, the solid aliases will not be applied

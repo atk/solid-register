@@ -1,4 +1,5 @@
 import { registeredAliases, filenameAliasing } from "./compile-aliases";
+import { projectPath } from "./read-config";
 import { readFileSync } from "fs";
 
 export type Compiler = (code: string, filename: string) => string;
@@ -21,13 +22,25 @@ const loadModule = (module: LoaderModule, filename: string) => {
   } catch (error: any) {
     if (error) {
       if (error.code === "ERR_REQUIRE_ESM") {
-        const code = readFileSync(filename, "utf-8");
-        module._compile(code, filename);
+        try {
+          const code = readFileSync(filename, "utf-8");
+          module._compile(code, filename);
+        } catch (e) {
+          throw error;
+        }
         return;
       }
     }
     throw error ?? new Error(`error when compiling ${filename}`);
   }
+};
+
+const pathAliasing = (filename: string) => {
+  const prefix =
+    filename.startsWith("/") && !filename.startsWith(projectPath)
+      ? projectPath
+      : "";
+  return `${prefix}${filenameAliasing(filename)}`;
 };
 
 const registerExtension = (extension: string | string[]) => {
@@ -40,6 +53,15 @@ const registerExtension = (extension: string | string[]) => {
     ) => {
       if (registeredAliases[extension]) {
         filename = filenameAliasing(filename);
+        registeredCompilers[extension] = [
+          (code: string) =>
+            code.replace(
+              /(\b(?:import[^;'"]*|require)\s*\(?)(["'])(.*?)\2/gm,
+              (full, call, delim, filename) =>
+                full ? `${call}${delim}${pathAliasing(filename)}${delim}` : ""
+            ),
+          ...(registeredCompilers[extension] || []),
+        ];
       }
       if (registeredCompilers[extension]) {
         const mod = module as LoaderModule;
