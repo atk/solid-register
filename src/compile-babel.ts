@@ -20,7 +20,7 @@ try {
     extensions,
   });
 } catch (e) {
-  console.log(
+  console.warn(
     "\x1b[33m⚠️ package missing to run the configured compilation.\n Please run:\x1b[0m\n\nnpm i --save-dev @babel-register\n"
   );
 }

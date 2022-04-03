@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": [
@@ -38,7 +38,8 @@
     "ts-node": ">=10.0.0",
     "happy-dom": ">=2.0.0",
     "jsdom": ">=18.0.0",
-    "linkedom": ">=0.10.0"
+    "linkedom": ">=0.10.0",
+    "postcss": ">=7.0.0"
   },
   "peerDependenciesMeta": {
     "@babel/plugin-transform-runtime": {
@@ -57,6 +58,9 @@
       "optional": true
     },
     "linkedom": {
+      "optional": true
+    },
+    "postcss": {
       "optional": true
     }
   }

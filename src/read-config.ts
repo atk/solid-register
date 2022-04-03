@@ -8,8 +8,17 @@ export type SolidRegisterConfiguration = {
       | { engine: "solid"; extensions?: string[] }
       | { engine: "ts-node" }
       | { engine: "babel"; extensions: string[] };
-    /** switch off css (modules) compilation */
-    css?: boolean;
+    /** configure css (modules) compilation */
+    css?:
+      | boolean
+      | {
+          /** support loading CSS (default is `['.css']`) */
+          extensions?: string[];
+          /** support CSS modules (string array allows to select extensions) */
+          modules?: boolean | string[];
+          /** support postCSS (string array allows to select extensions, needs to be installed in project) */
+          postcss?: boolean | string[];
+        };
     assets?:
       | {
           /** an array with the extensions string of the files that should return an asset path, i.e. `['.svg', '.csv']` */

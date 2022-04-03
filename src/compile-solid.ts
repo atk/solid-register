@@ -14,6 +14,7 @@ try {
 import { Loader, TransformOptions, transformSync } from "esbuild";
 
 import "regenerator-runtime/runtime";
+import { solidAliasing } from "./compile-aliases";
 import { config } from "./read-config";
 
 import { registerCompiler } from "./register-extension";

@@ -1,9 +1,9 @@
-import { config } from "./read-config";
-import { sep } from "path";
+import { config, projectPath } from "./read-config";
+import { sep, join } from "path";
 
 const s = sep === "/" ? sep : `${sep}${sep}`;
 
-const solidAliases = {
+const solidConditionAliases = {
   server: {
     [`solid-js${s}dist${s}(solid|dev)`]: `solid-js${s}dist${s}solid`,
     [`solid-js${s}web${s}dist${s}(web|dev)`]: `solid-js${s}web${s}dist${s}web`,
@@ -24,33 +24,67 @@ const usesConditions = process.execArgv.some(
     ["development", "browser", "node"].includes(args[index + 1])
 );
 
-const aliases: Record<string, string> = Object.assign(
-  config.aliases?.filenames || {},
-  (!usesConditions && solidAliases[config.aliases?.solid ?? "dev"]) || {}
-);
-const aliasRegexes = Object.keys(aliases).reduce<Record<string, RegExp>>(
-  (regexes, match) => {
-    regexes[match] = new RegExp(match);
-    return regexes;
-  },
-  {}
-);
+const createFilenameAliasing = (aliases: Record<string, string>) => {
+  const regexes = Object.keys(aliases).reduce<Record<string, RegExp>>(
+    (regexes, match) => {
+      regexes[match] = new RegExp(match);
+      return regexes;
+    },
+    {}
+  );
+  return (filename: string) =>
+    Object.entries(aliases).reduce<string>(
+      (name, [match, replace]) =>
+        !name && regexes[match].test(filename)
+          ? filename.replace(regexes[match], replace)
+          : name,
+      ""
+    ) || filename;
+};
 
-export const filenameAliasing = (filename: string) =>
-  Object.entries(aliases).reduce<string>(
-    (name, [match, replace]) =>
-      !name && aliasRegexes[match].test(filename)
-        ? filename.replace(aliasRegexes[match], replace)
-        : name,
-    ""
-  ) || filename;
+const aliases: Record<string, string> = config.aliases?.filenames || {};
+const solidAliases =
+  (!usesConditions && solidConditionAliases[config.aliases?.solid ?? "dev"]) ||
+  {};
+
+export const filenameAliasing = createFilenameAliasing(aliases);
+export const solidAliasing = solidAliases
+  ? createFilenameAliasing(solidAliases)
+  : (filename: string) => filename;
 
 const extensions = config.aliases?.extensions || [".js", ".jsx", ".ts", ".tsx"];
-
-export const registeredAliases: Record<string, Record<string, string>> = {};
-
-if (Object.keys(aliases).length > 0) {
-  extensions.forEach((ext) => {
-    registeredAliases[ext] = aliases;
-  });
+interface NodeModuleClass {
+  _resolveFilename: (
+    filename: string,
+    parentModule: NodeJS.Module,
+    isMain: boolean,
+    options: any
+  ) => string;
 }
+
+export const init = () => {
+  if (!Object.keys(aliases).length) {
+    return;
+  }
+  const Module: NodeModuleClass =
+    (module.constructor.length > 1 && (module.constructor as any)) ||
+    require("module");
+  const originalResolver = Module._resolveFilename.bind(Module);
+  Module._resolveFilename = (
+    filename: string,
+    parentModule: NodeJS.Module,
+    isMain: boolean,
+    options: any
+  ) => {
+    if (extensions.some((extension) => parentModule.id.endsWith(extension))) {
+      let alias = filenameAliasing(filename);
+      if (alias !== filename) {
+        if (alias.startsWith(sep) && !alias.startsWith(projectPath)) {
+          alias = join(projectPath, alias);
+        }
+        return originalResolver(alias, parentModule, isMain, options);
+      }
+    }
+    return originalResolver(filename, parentModule, isMain, options);
+  };
+};

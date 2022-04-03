@@ -56,7 +56,7 @@ if (config.compile?.css !== false) {
 }
 
 if (config.aliases?.filenames || config.aliases?.solid) {
-  require("./compile-aliases");
+  require("./compile-aliases").init();
 }
 
 require("./register-extension").init();

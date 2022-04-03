@@ -11,7 +11,7 @@ try {
   const { window } = new JSDOM(emptyPage, { url });
   registerDom(window);
 } catch (e) {
-  console.log(
+  console.warn(
     "\x1b[33m⚠️ package missing to run the configured dom.\n Please run:\x1b[0m\n\nnpm i --save-dev jsdom\n"
   );
 }

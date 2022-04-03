@@ -1,0 +1,3 @@
+$size: 1.2em;
+
+div { font-size: $size; }
