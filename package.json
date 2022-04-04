@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prettier": "prettier -w src/*.ts"
+    "prettier": "prettier -w src/*.ts",
+    "test": "node ./test-examples.mjs"
   },
   "keywords": [
     "solid.js",
