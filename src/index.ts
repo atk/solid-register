@@ -51,9 +51,7 @@ if (config.compile?.assets !== false) {
   require("./compile-assets");
 }
 
-if (config.compile?.css !== false) {
-  require("./compile-css");
-}
+require("./compile-css");
 
 if (config.aliases?.filenames || config.aliases?.solid) {
   require("./compile-aliases").init();

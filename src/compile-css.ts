@@ -149,14 +149,21 @@ const loadCssModuleStyles = (styles: string, filename: string) => `${loadStyles(
 )}
 module.exports = ${JSON.stringify(getModuleClasses(styles))};`;
 
-[
-  ...new Set([...extensions, ...moduleExtensions, ...postcssExtensions]),
-].forEach((extension) => {
-  if (postcssExtensions.includes(extension)) {
-    registerCompiler(extension, loadPostcssStyles);
-  } else if (moduleExtensions.includes(extension)) {
-    registerCompiler(extension, loadCssModuleStyles);
-  } else {
-    registerCompiler(extension, loadStyles);
-  }
-});
+const ignoreCss = (_styles: string, filename: string) =>
+  `/* ignoring CSS file ${filename} */`;
+
+if (config.compile?.css === false) {
+  registerCompiler(".css", ignoreCss);
+} else {
+  [
+    ...new Set([...extensions, ...moduleExtensions, ...postcssExtensions]),
+  ].forEach((extension) => {
+    if (postcssExtensions.includes(extension)) {
+      registerCompiler(extension, loadPostcssStyles);
+    } else if (moduleExtensions.includes(extension)) {
+      registerCompiler(extension, loadCssModuleStyles);
+    } else {
+      registerCompiler(extension, loadStyles);
+    }
+  });  
+}

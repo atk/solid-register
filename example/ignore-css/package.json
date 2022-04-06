@@ -1,0 +1,18 @@
+{
+  "name": "solid-register-basic-test",
+  "private": true,
+  "scripts": {
+    "test": "uvu -r solid-register"
+  },
+  "dependencies": {
+    "solid-js": "^1.3.13"
+  },
+  "devDependencies": {
+    "jsdom": "^19.0.0",
+    "solid-register": "../../dist",
+    "uvu": "^0.5.3"
+  },
+  "solid-register": {
+    "compile": { "css": false }
+  }
+}

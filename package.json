@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": [
@@ -20,7 +20,7 @@
   "contributors": ["Sanich Kotikov"],
   "license": "MIT",
   "dependencies": {
-    "esbuild": "^0.14.29",
+    "esbuild": "^0.14.32",
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
     "@types/babel__core": "^7.1.19",
     "@types/babel__plugin-transform-runtime": "^7.9.2",
     "@types/jsdom": "^16.2.14",
-    "prettier": "^2.6.1",
+    "prettier": "^2.6.2",
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
