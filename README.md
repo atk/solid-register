@@ -181,6 +181,10 @@ Again maybe your aliases are to broad; narrow them down. Installing `@babel/plug
 
 Add extensions to the compile.solid part of the solid-register configuration, as shown in the example above.
 
+### Rendering does not work with happy-dom
+
+Currently, there is an [issue](https://github.com/capricorn86/happy-dom/issues/451) in `innerHTML` support for template elements in happy-dom. Use jsdom or linkedom instead.
+
 ## Building solid-register
 
 You need to install the dependencies and run the `build` script
@@ -195,4 +199,4 @@ Thanks to [SanichKotikov](https://github.com/SanichKotikov)!
 
 ---
 
-© 2021 Alex Lohr
+© 2021-2022 Alex Lohr
