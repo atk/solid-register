@@ -165,5 +165,5 @@ if (config.compile?.css === false) {
     } else {
       registerCompiler(extension, loadStyles);
     }
-  });  
+  });
 }

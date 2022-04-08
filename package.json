@@ -1,6 +1,6 @@
 {
   "name": "solid-register",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "integrated package to run solid browser code in node",
   "main": "dist/index.js",
   "files": [
@@ -20,7 +20,7 @@
   "contributors": ["Sanich Kotikov"],
   "license": "MIT",
   "dependencies": {
-    "esbuild": "^0.14.32",
+    "esbuild": "^0.14.34",
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
