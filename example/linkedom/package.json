@@ -1,5 +1,5 @@
 {
-  "name": "solid-register-basic-test",
+  "name": "solid-register-linkedom-test",
   "private": true,
   "scripts": {
     "test": "uvu -r solid-register"
