@@ -80,7 +80,7 @@ type SolidRegisterConfiguration = {
         }
       | boolean;
   };
-  /** which DOM implementation should be registered and what URL should be used (default: jsdom and https://localhost:3000) */
+  /** which DOM implementation should be registered and what URL should be used (default: whatever is found first, jsdom, happy-dom or linkedom and https://localhost:3000) */
   dom?:
     | "jsdom"
     | "happy-dom"

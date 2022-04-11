@@ -11,8 +11,5 @@
     "happy-dom": "^2.55.0",
     "solid-register": "../../dist",
     "uvu": "^0.5.3"
-  },
-  "solid-register": {
-    "dom": "happy-dom"
   }
 }

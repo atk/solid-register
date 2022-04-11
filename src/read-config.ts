@@ -26,7 +26,7 @@ export type SolidRegisterConfiguration = {
         }
       | boolean;
   };
-  /** which DOM implementation should be registered and what URL should be used (default: jsdom and https://localhost:3000) */
+  /** which DOM implementation should be registered and what URL should be used (default: whatever is found first, jsdom, happy-dom or linkedom and https://localhost:3000) */
   dom?:
     | "jsdom"
     | "happy-dom"
@@ -59,9 +59,18 @@ export type SolidRegisterConfiguration = {
 };
 
 const config: SolidRegisterConfiguration = {
-  dom: "jsdom",
   aliases: { solid: "dev" },
 };
+
+(["jsdom", "happy-dom", "linkedom"] as const).some((dom) => {
+  try {
+    require.resolve(dom);
+    config.dom = dom;
+    return true;
+  } catch (e) {
+    return false;
+  }
+});
 
 const getPackageJson = () => {
   let path = process.cwd();
@@ -95,5 +104,15 @@ try {
     }
   }
 }
+
+export const conditions = process.execArgv.reduce(
+  ([last, conditions], arg) =>
+    last === "--conditions" ? [arg, [...conditions, arg]] : [arg, conditions],
+  ["", [] as string[]]
+)[1] as string[];
+
+export const usesConditions = conditions.some((condition) =>
+  ["development", "browser", "node"].includes(condition)
+);
 
 export { config };

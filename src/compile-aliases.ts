@@ -1,4 +1,4 @@
-import { config, projectPath } from "./read-config";
+import { config, projectPath, usesConditions } from "./read-config";
 import { sep, join } from "path";
 
 const s = sep === "/" ? sep : `${sep}${sep}`;
@@ -20,12 +20,6 @@ const solidConditionAliases = {
     [`solid-js${s}store${s}dist${s}(server|dev)`]: `solid-js${s}store${s}dist${s}store`,
   },
 };
-
-const usesConditions = process.execArgv.some(
-  (arg, index, args) =>
-    arg === "--conditions" &&
-    ["development", "browser", "node"].includes(args[index + 1])
-);
 
 const createFilenameAliasing = (aliases: Record<string, string>) => {
   const regexes = Object.keys(aliases).reduce<Record<string, RegExp>>(

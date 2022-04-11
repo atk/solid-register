@@ -1,4 +1,5 @@
 import { BabelFileResult, PluginItem } from "@babel/core";
+import { conditions, config } from "./read-config";
 
 let babelTransformSync = (
   code: string,
@@ -14,10 +15,12 @@ try {
 import { Loader, TransformOptions, transformSync } from "esbuild";
 
 import "regenerator-runtime/runtime";
-import { solidAliasing } from "./compile-aliases";
-import { config } from "./read-config";
 
 import { registerCompiler } from "./register-extension";
+
+const useSSR =
+  (conditions.length && conditions.includes("server")) ||
+  config.aliases?.solid === "server";
 
 const esbuildTransform = (
   code: string,
@@ -49,7 +52,11 @@ const esbuildTransform = (
 const babelTransform = (code: string, filename: string) => {
   const solidCode = babelTransformSync(code, {
     filename,
-    presets: [presetSolid],
+    presets: [
+      useSSR
+        ? [presetSolid, { generate: "ssr", hydratable: true }]
+        : presetSolid,
+    ],
     sourceMaps: "inline",
   });
   if (solidCode.code == null) {
