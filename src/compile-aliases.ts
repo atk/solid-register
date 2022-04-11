@@ -5,16 +5,19 @@ const s = sep === "/" ? sep : `${sep}${sep}`;
 
 const solidConditionAliases = {
   server: {
-    [`solid-js${s}dist${s}(solid|dev)`]: `solid-js${s}dist${s}solid`,
-    [`solid-js${s}web${s}dist${s}(web|dev)`]: `solid-js${s}web${s}dist${s}web`,
+    [`solid-js${s}dist${s}(solid|dev)`]: `solid-js${s}dist${s}server`,
+    [`solid-js${s}web${s}dist${s}(web|dev)`]: `solid-js${s}web${s}dist${s}server`,
+    [`solid-js${s}store${s}dist${s}(store|dev)`]: `solid-js${s}store${s}dist${s}server`,
   },
   dev: {
     [`solid-js${s}dist${s}(server|solid)`]: `solid-js${s}dist${s}dev`,
     [`solid-js${s}web${s}dist${s}(server|web)`]: `solid-js${s}web${s}dist${s}dev`,
+    [`solid-js${s}store${s}dist${s}(server|store)`]: `solid-js${s}store${s}dist${s}dev`,
   },
   browser: {
     [`solid-js${s}dist${s}(server|dev)`]: `solid-js${s}dist${s}solid`,
     [`solid-js${s}web${s}dist${s}(server|dev)`]: `solid-js${s}web${s}dist${s}web`,
+    [`solid-js${s}store${s}dist${s}(server|dev)`]: `solid-js${s}store${s}dist${s}store`,
   },
 };
 
