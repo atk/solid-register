@@ -7,9 +7,12 @@ let babelTransformSync = (
 ) => ({ code } as unknown as BabelFileResult);
 let presetSolid: PluginItem = (_context, _option = {}) => {};
 
+let solidPresetPresent = false;
+
 try {
   babelTransformSync = require("@babel/core").transformSync;
   presetSolid = require("babel-preset-solid");
+  solidPresetPresent = true;
 } catch (e) {}
 
 import { Loader, TransformOptions, transformSync } from "esbuild";
@@ -49,7 +52,7 @@ const esbuildTransform = (
   return esbuilt.code ?? code;
 };
 
-const babelTransform = (code: string, filename: string) => {
+const babelTransform = solidPresetPresent ? (code: string, filename: string) => {
   const solidCode = babelTransformSync(code, {
     filename,
     presets: [
@@ -66,7 +69,7 @@ const babelTransform = (code: string, filename: string) => {
     );
   }
   return solidCode.code ?? code;
-};
+} : (code: string, _filename: string) => code;
 
 const transformer = (code: string, filename: string) =>
   filename.endsWith("x")
